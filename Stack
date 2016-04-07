@@ -1,0 +1,51 @@
+package sort;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Stack<E> {
+	
+	private List<E> items = new ArrayList<>();
+	private int index = 0;
+	
+	public void push(E item) { 
+		this.items.add(item);
+		System.out.println("Push item:" + item);
+		index++;
+	} 
+	public E pop() {
+		
+		if( index > 0) {
+			E returnValue = this.items.remove(index-1);
+			index--;
+			System.out.println("Pop item:" + returnValue);
+			return returnValue;
+		}
+		System.out.println("Stack Empty!");
+		return null;
+	}
+	
+	public String toString() {
+		return items.toString();
+	}
+	
+	public static void main(String[] args) {
+		Stack<String> stack = new Stack<>();
+		
+		stack.push("test");
+		stack.push("test2");
+		stack.push("test3");
+	
+		stack.pop();
+		stack.pop();
+		stack.pop();
+		stack.pop();
+		
+		
+		stack.push("1");
+		
+		stack.pop();
+		stack.pop();
+		
+	}
+}
