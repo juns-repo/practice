@@ -1,0 +1,75 @@
+package sort;
+
+import java.util.Arrays;
+
+public class Bubble {
+	public static void main(String[] args) {
+		long normalTime = 0;
+		long recursivceTime = 0;
+		
+		
+		for ( int i = 0; i < 10;  i ++ ) {
+			int[] inputArray = new int[20];
+			for ( int j = 0; j < inputArray.length; j++) {
+				inputArray[j] = (int)(1+Math.random()*100);
+			}
+		
+			long startTime = System.nanoTime();
+			bubbleSort(inputArray);
+			normalTime += (System.nanoTime()-startTime);
+			System.out.println("Normal    time=" + ((System.nanoTime()-startTime)) +" nanoSecond");
+			
+			
+			startTime = System.nanoTime();
+			recursiveBubble(inputArray, 0, inputArray.length);
+			recursivceTime += (System.nanoTime()-startTime);
+			System.out.println("Recursive time=" + ((System.nanoTime()-startTime)) +" nanoSecond");
+		}
+		
+		System.out.println("Normal    total = " + normalTime / 10.0);
+		System.out.println("Recursive total = " + recursivceTime / 10.0);
+		
+	}
+	
+	public static void bubbleSort(int[] input){ 
+		
+		int[] array = Arrays.copyOf(input, input.length);
+		
+		for(int j = 0;j < array.length; j++ ) {
+			for ( int i = 0; i < array.length - 1 - j; i++ ){ 
+				if( array[i+1] < array[i] ) { 
+					int temp = array[i];
+					array[i] = array[i+1];
+					array[i+1] = temp;
+				}
+			}
+		} 
+		
+		System.out.println(Arrays.toString(array));
+	}
+	
+	public static void recursiveBubble(int[] input, int startIndex, int endIndex) {
+		
+		if( endIndex == startIndex ) { 
+			System.out.println(Arrays.toString(input));
+			return;
+		}
+		
+		if ( endIndex-1 == startIndex ) {
+			recursiveBubble(input, 0,endIndex-1);
+		}
+		else if(input[startIndex] > input[startIndex+1] ) { 
+			
+			int temp = input[startIndex];
+			input[startIndex] = input[startIndex+1];
+			input[startIndex+1] = temp;
+			
+			recursiveBubble(input, startIndex+1, endIndex);
+		
+		} else  {
+			recursiveBubble(input, startIndex+1, endIndex);
+		}
+	}
+
+
+}
